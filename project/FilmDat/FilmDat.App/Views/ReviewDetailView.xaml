@@ -1,0 +1,57 @@
+﻿<local:UserControlBase x:Class="FilmDat.App.Views.ReviewDetailView"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:local="clr-namespace:FilmDat.App.Views"
+                       xmlns:texts="clr-namespace:FilmDat.App.Resources.Texts"
+                       mc:Ignorable="d"
+                       d:DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReviewDetailViewModel}"
+                       d:DesignHeight="500" d:DesignWidth="400" Background="LightGray"
+                       Height="auto" Width="auto">
+
+    <Grid Visibility="{Binding Model, Converter={StaticResource  NullToVisibilityConverter}}" Width="auto" Margin="5"
+          ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Command="{Binding SaveCommand}" Content="{x:Static texts:ReviewDetailResource.Save_button}"
+                    Margin="2" />
+        </StackPanel>
+        <Grid Grid.Row="1" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="{x:Static texts:ReviewDetailResource.NickName_form}" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.NickName, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="1" Grid.Column="0" Content="{x:Static texts:ReviewDetailResource.Date_form}" />
+            <DatePicker
+                SelectedDate="{Binding
+                    Path=Model.Date,
+                    Mode=TwoWay}"
+                Grid.Row="1" Grid.Column="1" />
+            <Label Grid.Row="2" Grid.Column="0" Content="{x:Static texts:ReviewDetailResource.Rating_form}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.Rating, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="3" Grid.Column="0" Content="{x:Static texts:ReviewDetailResource.TextReview_form}" />
+            <TextBox Grid.Row="4"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     VerticalAlignment="Stretch"
+                     Text="{Binding Model.TextReview, UpdateSourceTrigger=PropertyChanged}"
+                     TextAlignment="Left"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Margin="5" />
+        </Grid>
+    </Grid>
+</local:UserControlBase>
